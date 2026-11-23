@@ -37,3 +37,11 @@ Write an entry every time something breaks. This becomes the "rule that broke" s
   system and shell operations) and to Memory enabled (long-term storage of conversation history).
 - Layer: harness configuration (tool surface and data retention)
 - Fix: turned Memory off, and lowered Max Iterations to 10, Timeout to 5 minutes, and Max tokens to 1024.
+
+### Entry 4: Lambda was attached to a broad PowerUserAccess role
+- Date: 2026-11-23
+- What happened: The Lambda's execution role was a pre-existing role with PowerUserAccess,
+  which could read the customers table and bucket directly, bypassing the per-customer session.
+- Layer: IAM (execution role)
+- Fix: created a dedicated role with only basic logging permissions; the Lambda can reach
+  customer data only through the scoped STS session.
