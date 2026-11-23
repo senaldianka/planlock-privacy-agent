@@ -17,4 +17,4 @@ Write an entry every time something breaks. This becomes the "rule that broke" s
 
 ## Entries
 
-(none yet)
+1) Agent name with a hyphen was rejected; the name must start with a letter and use only letters, numbers and underscores." It's small, but it's real build-process detail for your write-up
