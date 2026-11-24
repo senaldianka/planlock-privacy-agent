@@ -65,3 +65,13 @@ Write an entry every time something breaks. This becomes the "rule that broke" s
 - After numbers: (fill in after Step D)
 - Screenshot/file: the run 1 screenshot, with the account ID blurred and the approval phrase hidden
 
+### Entry 5: Harness allowed-tools list still exposed the built-in shell
+- Date: 2026-11-24
+- Rule affected: no actions outside the export tool
+- What happened: The Allowed tools list contained "*" alongside the gateway entry. A shell
+  request was refused, but only because of the system prompt (model behavior), not the config.
+- Layer that held / failed: model refusal held; the allowed-tools list failed to restrict.
+- Fix: removed "*", leaving only the gateway entry.
+- Before: built-in shell and file tools reachable by configuration
+- After: only the gateway tool allowed
+
