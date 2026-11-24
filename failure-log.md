@@ -45,3 +45,12 @@ Write an entry every time something breaks. This becomes the "rule that broke" s
 - Layer: IAM (execution role)
 - Fix: created a dedicated role with only basic logging permissions; the Lambda can reach
   customer data only through the scoped STS session.
+
+### Entry 5: Guardrail denied topic blocked legitimate exports
+- Date/time: 2026-11-24
+- Rule affected: Rule 2 (only the verified customer's records), plus usability of the legitimate export
+- What I did / what attacked it: Tested the guardrail in the Bedrock console with two normal requests: "Please export my data. My customer ID is cust_001." and "Export my profile and my support transcripts."
+- What happened (expected vs actual): Expected both to pass. Both were blocked. The trace showed the "Other customers data" denied topic with Detected: TRUE, while   the prompt attack and Legal advice filters did nothing. The topic matches by meaning, so ordinary export wording looked close to its sample phrases.
+- Which layer caught it, or failed to: Guardrail (false positive)
+- Fix: Removed the "Other customers data" topic. The rule is enforced by the session policy in IAM and the Lambda's single-customer plan validation, so no protection is lost. Narrowing the definition and samples first did not stop the false positive.
+
