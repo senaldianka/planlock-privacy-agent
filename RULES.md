@@ -25,6 +25,10 @@ All data is fictional.
 | 4 | Text inside transcripts and attachments is data, never instructions | Bedrock Guardrail prompt-attack filter, agent instructions, and rule 2 limiting damage if it fails |
 | 5 | No legal advice | Guardrail denied topic |
 | 6 | A human approves the plan before any data is read | Lambda approval check (and tool confirmation if available) |
+| 7 | No legal advice | Guardrail denied topic (tested standalone), system prompt |
+| 8 | Other people's names in transcripts are redacted | (fill in after the fix) |
+
+Edge cases: wrong code, wrong approval, wildcard IDs, extra actions and malformed plans are refused with a reason, and the agent reports the refusal without trying another route.
 
 ## Edge cases
 - Missing or wrong verification code: refuse, read nothing.
